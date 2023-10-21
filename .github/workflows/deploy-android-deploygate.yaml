@@ -25,11 +25,10 @@ jobs:
       - name: Upload To DeployGate
         run: |
           curl \
-          -F "token=${{secrets.DEPLOYGATE_TOKEN}}" \
+          -H "Authorization: token ${{secrets.DEPLOYGATE_API_KEY}}" \
           -F "file=@build/app/outputs/flutter-apk/app-release.apk" \
-          -F "message=https://github.com/${{ env.GITHUB_ACTOR }}/${{ env.GITHUB_REPOSITORY }}/commit/`git rev-parse --short $GITHUB_SHA`" \
+          -F "message=https://github.com/${{ env.GITHUB_REPOSITORY }}/commit/`git rev-parse --short $GITHUB_SHA`" \
           -F "distribution_name=$GITHUB_HEAD_REF" \
-          https://deploygate.com/api/${{secrets.DEPLOYGATE_USER}}/actindi/apps
+          https://deploygate.com/api/users/${{secrets.DEPLOYGATE_USER}}/apps
         env:
-          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_REPOSITORY: ${{ github.repository }}
