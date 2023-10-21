@@ -6,7 +6,7 @@ on:
 jobs:
   build_ios:
     name: Build for Android
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checks-out my repository
