@@ -34,8 +34,8 @@ runs:
     - name: Setup Release Keystore
       shell: bash
       run: |
-        echo ${{ input.android_keystore }} | base64 --decode > android/key.jks
-        echo ${{ input.android_properties }} | base64 --decode > android/key.properties
+        echo "${ANDROID_KEYSTORE}" | base64 --decode > android/key.jks
+        echo "${ANDROID_PROPERTIES}" | base64 --decode > android/key.properties
 
     # ビルド
     - name: Build
