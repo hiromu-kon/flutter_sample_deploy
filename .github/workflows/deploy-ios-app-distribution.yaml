@@ -1,0 +1,22 @@
+name: Deploy iOS App Distribution
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_ios:
+    name: Build for iOS
+    runs-on: macos-latest
+
+    steps:
+      - name: Checks-out my repository
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+
+      - name: Build iOS
+        uses: ./.github/actions/build-ios
+      
+      - name: Upload iOS AppStore
+        uses: ./.github/actions/upload-ios
