@@ -13,3 +13,7 @@ runs:
         flutter-version: ${{ env.FLUTTER_VERSION }}
         channel: ${{ env.FLUTTER_CHANNEL }}
         cache: true
+
+    - name: Download Flutter packages
+      shell: bash
+      run: flutter pub get

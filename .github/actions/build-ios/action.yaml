@@ -4,10 +4,6 @@ runs:
   using: composite
   steps:
 
-    - name: Download Flutter packages
-      shell: bash
-      run: flutter pub get
-
     - name: Import Provisioning Profile
       shell: bash
       run: |
