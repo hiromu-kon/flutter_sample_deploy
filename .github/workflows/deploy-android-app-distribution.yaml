@@ -1,4 +1,4 @@
-name: Deploy Android App Distribution
+name: Deploy Android to App Distribution
 
 on:
   workflow_dispatch:

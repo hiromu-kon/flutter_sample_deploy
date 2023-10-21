@@ -1,0 +1,33 @@
+name: Deploy Android to DeployGate
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_ios:
+    name: Build for Android
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checks-out my repository
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+
+      - name: Build Android
+        uses: ./.github/actions/build-android
+        with:
+          android_keystore: ${{ secrets.ANDROID_KEYSTORE }}
+          android_properties: ${{ secrets.ANDROID_PROPERTIES }}
+
+      # DeployGate にアップロード
+      - name: Upload To DeployGate
+        run: |
+          curl \
+          -F "token=${{secrets.DEPLOYGATE_TOKEN}}" \
+          -F "file=@build/app/outputs/flutter-apk/app-release.apk" \
+          -F "message=https://github.com/${GITHUB_ACTOR}/${GITHUB_REPOSITORY}/commit/`git rev-parse --short $GITHUB_SHA`" \
+          -F "distribution_name=$GITHUB_HEAD_REF" \
+          https://deploygate.com/api/${{secrets.DEPLOYGATE_USER}}/actindi/apps
+    
