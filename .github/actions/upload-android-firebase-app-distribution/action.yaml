@@ -1,0 +1,26 @@
+name: Upload Android Firebase App Distribution
+description: Upload Android Firebase App Distribution
+
+inputs:
+  firebase_app_id:
+    description: 'FirebaseのアプリID'
+    required: true
+  credentials_file_content:
+    description: 'Google Cloud Platformから取得したサービスアカウントキー'
+    required: true
+  groups:
+    description: 'テストアプリを配布するグループ名'
+    required: true 
+
+runs:
+  using: composite
+  steps:
+
+    # Firebase App Distribution にアップロード
+    - name: Upload To Firebase App Distribution
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
+      with:
+        appId: ${{ inputs.firebase_app_id }}
+        serviceCredentialsFileContent: ${{ inputs.credentials_file_content }}
+        groups: ${{ inputs.groups }}
+        file: build/app/outputs/bundle/release/app-release.aab

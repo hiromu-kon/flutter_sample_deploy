@@ -20,3 +20,10 @@ jobs:
         with:
           android_keystore: ${{ secrets.ANDROID_KEYSTORE }}
           android_properties: ${{ secrets.ANDROID_PROPERTIES }}
+
+      - name: Upload Android Firebase App Distribution
+        uses: ./.github/actions/upload-android-firebase-app-distribution
+        with:
+          firebase_app_id: ${{ secrets.FIREBASE_APP_ID }}
+          android_properties: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: developer

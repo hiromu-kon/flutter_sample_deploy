@@ -1,0 +1,16 @@
+name: Upload Android
+description: Upload Android
+runs:
+  using: composite
+  steps:
+
+    # Google Play Console にアップロード
+    - name: Upload to Google Play Console
+      uses: r0adkll/upload-google-play@v1
+      with:
+        releaseFiles: ${{ env.APP_DIR }}/build/app/outputs/bundle/${{ env.FLAVOR }}Release/app-${{ env.FLAVOR }}-release.aab
+        serviceAccountJsonPlainText: ${{ env.GOOGLE_PLAY_CONSOLE_GCP_SA_KEY }}
+        packageName: ${{ env.GPC_PACKAGE_NAME }}
+        track: internal
+        releaseName: ${{ env.MODULE_NAME }} (${{ env.APP_VERSION }})
+        status: draft
