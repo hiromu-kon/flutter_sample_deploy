@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "802703258708",
+    "project_id": "flutter-sample-deploy",
+    "storage_bucket": "flutter-sample-deploy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802703258708:android:44ebb37900b92766b629c1",
+        "android_client_info": {
+          "package_name": "com.hiromukon.example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClzqpWlgwasmlQyLqbsjfvWYzrinhU87I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
