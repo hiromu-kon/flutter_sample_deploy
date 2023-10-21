@@ -2,14 +2,24 @@ name: Setup Flutter
 description: Setup Flutter
 runs:
   using: composite
-  steps:
+  # steps:
+  #   - name: Parse Flutter version
+  #     uses: kuhnroyal/flutter-fvm-config-action@v1
 
-    - name: Parse Flutter version
-      uses: kuhnroyal/flutter-fvm-config-action@v1
+  #   - name: Install Flutter
+  #     uses: subosito/flutter-action@v2
+  #     with:
+  #       flutter-version: ${{ env.FLUTTER_VERSION }}
+  #       channel: ${{ env.FLUTTER_CHANNEL }}
+  #       cache: true
+  steps:
+    - name: Checks-out my repository
+      uses: actions/checkout@v2
 
     - name: Install Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: ${{ env.FLUTTER_VERSION }}
-        channel: ${{ env.FLUTTER_CHANNEL }}
-        cache: true
+      shell: bash
+      run: git clone https://github.com/flutter/flutter.git
+
+    - name: Add path
+      shell: bash
+      run: echo "$(pwd)/flutter/bin" >> $GITHUB_PATH
