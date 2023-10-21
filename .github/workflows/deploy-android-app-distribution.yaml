@@ -28,5 +28,5 @@ jobs:
           appId: ${{ secrets.FIREBASE_APP_ID }}
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: developer
-          file: build/app/outputs/bundle/release/app-release.aab
+          file: build/app/outputs/flutter-apk/app-release.apk
   
