@@ -1,0 +1,46 @@
+name: Build Android
+description: Build Android
+
+inputs:
+  android_keystore:
+    description: 'key.jksを上書きするファイル'
+    required: true
+  android_properties:
+    description: 'key.propertiesを上書きするファイル'
+    required: true
+
+runs:
+  using: composite
+  steps:
+
+    # - name: Create upload-keystore.jks
+    #   shell: bash
+    #   run: echo -n ${{ secrets.ANDROID_KEY_JKS }} | base64 -d > android/app/upload-keystore.jks
+
+    # - name: Create service-account.json
+    #   shell: bash
+    #   run: echo -n ${{ secrets.ANDROID_SERVICE_ACCOUNT_KEY_JSON }} | base64 -d > android/service-account.json
+
+    # - name: Create key.properties
+    #   shell: bash
+    #   run: |
+    #     echo 'storeFile=upload-keystore.jks' > android/key.properties
+    #     echo 'serviceAccountFile=service-account.json' >> android/key.properties
+    #     echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' >> android/key.properties
+    #     echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
+    #     echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
+
+    # リリースビルドに必要なキーストアのセットアップ
+    - name: Setup Release Keystore
+      shell: bash
+      run: |
+        echo ${{ input.android_keystore }} | base64 --decode > android/key.jks
+        echo ${{ input.android_properties }} | base64 --decode > android/key.properties
+
+    # ビルド
+    - name: Build
+      shell: bash
+      run: |
+        flutter build appbundle \
+          --release \
+          --build-number ${{ github.run_number }}

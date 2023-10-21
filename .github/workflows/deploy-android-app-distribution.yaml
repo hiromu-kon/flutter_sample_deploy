@@ -1,0 +1,22 @@
+name: Deploy Android App Distribution
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_ios:
+    name: Build for Android
+    runs-on: macos-latest
+
+    steps:
+      - name: Checks-out my repository
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+
+      - name: Build Android
+        uses: ./.github/actions/build-android
+        with:
+          android_keystore: ${{ secrets.ANDROID_KEYSTORE }}
+          android_properties: ${{ secrets.ANDROID_PROPERTIES }}

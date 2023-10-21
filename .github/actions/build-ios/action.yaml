@@ -16,7 +16,7 @@ runs:
         p12-file-base64: ${{ secrets.APPLE_CERTIFICATES_P12 }}
         p12-password: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
 
-    - name: Create ipa file
+    - name: Build
       shell: bash
       run: |
         flutter build ipa \
