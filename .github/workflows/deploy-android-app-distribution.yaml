@@ -21,9 +21,12 @@ jobs:
           android_keystore: ${{ secrets.ANDROID_KEYSTORE }}
           android_properties: ${{ secrets.ANDROID_PROPERTIES }}
 
-      - name: Upload Android Firebase App Distribution
-        uses: ./.github/actions/upload-android-firebase-app-distribution
+      # Firebase App Distribution にアップロード
+      - name: Upload To Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          firebase_app_id: ${{ secrets.FIREBASE_APP_ID }}
-          android_properties: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: developer
+          file: build/app/outputs/bundle/release/app-release.aab
+  
