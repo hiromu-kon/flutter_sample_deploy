@@ -1,4 +1,4 @@
-name: Deploy iOS App Distribution
+name: Deploy iOS to App Distribution
 
 on:
   workflow_dispatch:

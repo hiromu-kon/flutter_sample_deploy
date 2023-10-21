@@ -27,7 +27,9 @@ jobs:
           curl \
           -F "token=${{secrets.DEPLOYGATE_TOKEN}}" \
           -F "file=@build/app/outputs/flutter-apk/app-release.apk" \
-          -F "message=https://github.com/${GITHUB_ACTOR}/${GITHUB_REPOSITORY}/commit/`git rev-parse --short $GITHUB_SHA`" \
+          -F "message=https://github.com/${{ env.GITHUB_ACTOR }}/${{ env.GITHUB_REPOSITORY }}/commit/`git rev-parse --short $GITHUB_SHA`" \
           -F "distribution_name=$GITHUB_HEAD_REF" \
           https://deploygate.com/api/${{secrets.DEPLOYGATE_USER}}/actindi/apps
-    
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
