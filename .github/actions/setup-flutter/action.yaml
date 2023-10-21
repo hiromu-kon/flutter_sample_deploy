@@ -1,0 +1,15 @@
+name: Setup Flutter
+description: Setup Flutter
+runs:
+  using: composite
+  steps:
+
+    - name: Parse Flutter version
+      uses: kuhnroyal/flutter-fvm-config-action@v1
+
+    - name: Install Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: ${{ env.FLUTTER_CHANNEL }}
+        cache: true
